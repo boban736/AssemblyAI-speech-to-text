@@ -1,0 +1,30 @@
+services:
+  app:
+    build: .
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      DATA_DIR: /data
+    volumes:
+      - ./data:/data
+    # без HTTPS-профиля сервис доступен напрямую на порту 8000
+    ports:
+      - "${BIND:-8000}:8000"
+
+  # HTTPS: docker compose --profile https up -d   (нужен DOMAIN в .env, BIND=127.0.0.1:8000)
+  caddy:
+    image: caddy:2
+    profiles: ["https"]
+    restart: unless-stopped
+    depends_on: [app]
+    environment:
+      DOMAIN: ${DOMAIN}
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+    ports:
+      - "80:80"
+      - "443:443"
+
+volumes:
+  caddy_data:

@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Транскрибатор</title>
+<meta name="theme-color" content="#4f46e5">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Транскрибатор">
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="icon" href="/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/icon-180.png">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<main id="app">
+  <section id="login" hidden>
+    <h1>Транскрибатор</h1>
+    <form id="login-form">
+      <input type="password" id="password" placeholder="Пароль" autocomplete="current-password" required autofocus>
+      <button type="submit" class="primary">Войти</button>
+      <p id="login-error" class="error" role="alert"></p>
+    </form>
+  </section>
+
+  <section id="main" hidden>
+    <header>
+      <h1>Транскрибатор</h1>
+      <button id="logout" class="link">Выйти</button>
+    </header>
+
+    <label id="drop" tabindex="0">
+      <input type="file" id="file" multiple accept="audio/*,video/*,.m4a,.mp3,.wav,.ogg,.aac,.flac,.mp4,.mov,.webm,.amr,.caf">
+      <strong>Выберите файлы или перетащите сюда</strong>
+      <span>Голосовые заметки iPhone (.m4a), wav, mp4, ogg… — можно несколько сразу</span>
+    </label>
+    <div id="uploads"></div>
+
+    <h2>Записи</h2>
+    <div id="list"><p class="muted">Пока пусто</p></div>
+  </section>
+</main>
+<div id="toast" role="status"></div>
+<script src="/app.js"></script>
+</body>
+</html>
